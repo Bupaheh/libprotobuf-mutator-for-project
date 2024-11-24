@@ -8,6 +8,10 @@
 
 #include <string>
 
+namespace xml {
+
 std::string render(const google::protobuf::Message& message);
+
+}
 
 #endif //XML_RENDERER_H

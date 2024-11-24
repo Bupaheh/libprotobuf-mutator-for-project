@@ -16,22 +16,14 @@
 #include <vector>
 
 #include "examples/xml/xml.pb.h"
-#include "examples/xml/xml_writer.h"
-#include "expat.h"  // NOLINT
 #include "src/libfuzzer/libfuzzer_macro.h"
 #include "xml_renderer.h"
-
-namespace {
-const std::vector<const char*> kEncodings = {{"UTF-16", "UTF-8", "ISO-8859-1",
-                                              "US-ASCII", "UTF-16BE",
-                                              "UTF-16LE", "INVALIDENCODING"}};
-}
 
 int counter = 0;
 
 DEFINE_PROTO_FUZZER(const protobuf_mutator::xml::Input& message) {
-  std::string xml = render(message);
-  std::string filename = std::to_string(counter) + ".txt";
+  const std::string xml = xml::render(message);
+  const std::string filename = std::to_string(counter) + ".txt";
   std::ofstream out;
   out.open ("/home/pvl/folder/projects/libprotobuf-mutator-for-project/examples/expat/output/" + filename);
   out << xml << std::endl;
