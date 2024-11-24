@@ -17,7 +17,12 @@ set(EXPAT_CXXFLAGS "${CMAKE_CXX_FLAGS} ${FUZZING_FLAGS}")
 include(expat)
 
 add_executable(expat_example
-               expat_example.cc)
+               expat_example.cc
+        xml_renderer.cpp
+        xml_renderer.h
+        printer.cpp
+        printer.h
+)
 target_link_libraries(expat_example
                       protobuf-mutator-xml
                       ${LIB_PROTO_MUTATOR_FUZZER_LIBRARIES}

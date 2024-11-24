@@ -12,13 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <fstream>
 #include <vector>
-
-#include "expat.h"  // NOLINT
 
 #include "examples/xml/xml.pb.h"
 #include "examples/xml/xml_writer.h"
+#include "expat.h"  // NOLINT
 #include "src/libfuzzer/libfuzzer_macro.h"
+#include "xml_renderer.h"
 
 namespace {
 const std::vector<const char*> kEncodings = {{"UTF-16", "UTF-8", "ISO-8859-1",
@@ -26,15 +27,14 @@ const std::vector<const char*> kEncodings = {{"UTF-16", "UTF-8", "ISO-8859-1",
                                               "UTF-16LE", "INVALIDENCODING"}};
 }
 
-DEFINE_PROTO_FUZZER(const protobuf_mutator::xml::Input& message) {
-  std::string xml = MessageToXml(message.document());
-  int options = message.options();
+int counter = 0;
 
-  int use_ns = options % 2;
-  options /= 2;
-  auto enc = kEncodings[options % kEncodings.size()];
-  XML_Parser parser =
-      use_ns ? XML_ParserCreateNS(enc, '\n') : XML_ParserCreate(enc);
-  XML_Parse(parser, xml.data(), xml.size(), true);
-  XML_ParserFree(parser);
+DEFINE_PROTO_FUZZER(const protobuf_mutator::xml::Input& message) {
+  std::string xml = render(message);
+  std::string filename = std::to_string(counter) + ".txt";
+  std::ofstream out;
+  out.open ("/home/pvl/folder/projects/libprotobuf-mutator-for-project/examples/expat/output/" + filename);
+  out << xml << std::endl;
+  out.close();
+  counter++;
 }
