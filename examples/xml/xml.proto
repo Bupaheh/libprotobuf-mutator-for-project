@@ -1,28 +1,78 @@
 syntax = "proto2";
 package protobuf_mutator.xml;
 
+// Simplified definition of XML formant according https://www.w3.org/TR/xml/
+// Not all features are implemented and some rules are flattened.
+
+// There are no required fields to allow backward compatibility with older
+// corpus.
+
+// document ::= prolog element Misc*
+// prolog ::= XMLDecl? Misc* (doctypedecl Misc*)?
+// XMLDecl ::= '<?xml' VersionInfo EncodingDecl? SDDecl? S? '?>'
+// doctypedecl ::=
+//    '<!DOCTYPE' S Name (S ExternalID)? S? ('[' intSubset ']' S?)? '>'
+message ModelVersion {
+    required string version = 1;
+}
+
+message GroupId {
+    required string group = 1;
+}
+
+message ArtifactId {
+    required string artifact = 1;
+}
+
+message Version {
+    required string vers = 1;
+}
+
 enum ScopeEnum {
+  option allow_alias = true;
+
+  compile = 1;
   provided = 1;
   runtime = 2;
   test = 3;
   system = 4;
 }
 
-message projectName {
+message DependencyScope {
+  required ScopeEnum scopeEnum = 1;
+}
+
+enum AttrMode {
+  mode1 = 1;
+  mode2 = 2;
+}
+
+message DepAttr {
   required string name = 1;
+  required AttrMode mode = 2;
 }
 
-message status {
-  required ScopeEnum scope = 1;
+message Dependency {
+  required GroupId groupId = 1;
+  required ArtifactId artifactId = 2;
+  required Version version = 3;
+  required DependencyScope dependencyScope = 4;
+
+  optional DepAttr xml_attributes = 5;
 }
 
-message project {
-  required projectName name = 1;
-  repeated status status = 2;
+message Dependencies {
+  repeated Dependency dependency = 1;
+}
+
+message Project {
+  required ModelVersion modelVersion = 1;
+  required GroupId groupId = 2;
+  required ArtifactId artifactId = 3;
+  required Version version = 4;
+  optional Dependencies dependencies = 5;
 }
 
 message Input {
-  required project project = 1;
+  required Project project = 1;
 }
-
-
