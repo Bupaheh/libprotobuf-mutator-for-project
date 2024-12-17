@@ -116,7 +116,7 @@ void render_attribute_field(
   out.print(" " + field->name() + "=\"");
 
   if (field->is_repeated()) {
-    std::cerr << "Repeated attributes is not supported";
+    std::cerr << "Repeated attributes are not supported";
     return;
   }
 
