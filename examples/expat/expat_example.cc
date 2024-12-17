@@ -25,8 +25,10 @@ DEFINE_PROTO_FUZZER(const protobuf_mutator::xml::Input& message) {
   const std::string xml = xml::render(message);
   const std::string filename = std::to_string(counter) + ".txt";
   std::ofstream out;
-  out.open ("/home/pvl/folder/projects/libprotobuf-mutator-for-project/examples/expat/output/" + filename);
-  out << xml << std::endl;
-  out.close();
-  counter++;
+  if (counter < 1000) {
+    out.open ("/home/pvl/folder/projects/proto-code/libprotobuf-mutator-for-project/examples/expat/output/" + filename);
+    out << xml << std::endl;
+    out.close();
+    counter++;
+  }
 }

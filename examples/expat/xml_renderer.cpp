@@ -5,6 +5,7 @@
 #include "xml_renderer.h"
 
 #include "printer.h"
+#include "string"
 
 using namespace google::protobuf;
 
@@ -36,6 +37,50 @@ void render_field(
       } else {
         for (int i = 0; i < reflection->FieldSize(message, field); i++) {
           out.println(reflection->GetRepeatedEnum(message, field, i)->name());
+        }
+      }
+      break;
+    }
+
+    case internal::FieldDescriptorLite::TYPE_INT32: {
+      if (!field->is_repeated()) {
+        out.println(std::to_string(reflection->GetInt32(message, field)));
+      } else {
+        for (int i = 0; i < reflection->FieldSize(message, field); i++) {
+          out.println(std::to_string(reflection->GetRepeatedInt32(message, field, i)));
+        }
+      }
+      break;
+    }
+
+    case internal::FieldDescriptorLite::TYPE_UINT32: {
+      if (!field->is_repeated()) {
+        out.println(std::to_string(reflection->GetUInt32(message, field)));
+      } else {
+        for (int i = 0; i < reflection->FieldSize(message, field); i++) {
+          out.println(std::to_string(reflection->GetRepeatedUInt32(message, field, i)));
+        }
+      }
+      break;
+    }
+
+    case internal::FieldDescriptorLite::TYPE_INT64: {
+      if (!field->is_repeated()) {
+        out.println(std::to_string(reflection->GetInt64(message, field)));
+      } else {
+        for (int i = 0; i < reflection->FieldSize(message, field); i++) {
+          out.println(std::to_string(reflection->GetRepeatedInt64(message, field, i)));
+        }
+      }
+      break;
+    }
+
+    case internal::FieldDescriptorLite::TYPE_UINT64: {
+      if (!field->is_repeated()) {
+        out.println(std::to_string(reflection->GetUInt64(message, field)));
+      } else {
+        for (int i = 0; i < reflection->FieldSize(message, field); i++) {
+          out.println(std::to_string(reflection->GetRepeatedUInt64(message, field, i)));
         }
       }
       break;
