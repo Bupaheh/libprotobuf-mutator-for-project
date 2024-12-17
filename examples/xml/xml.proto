@@ -1,66 +1,28 @@
 syntax = "proto2";
 package protobuf_mutator.xml;
 
-// Simplified definition of XML formant according https://www.w3.org/TR/xml/
-// Not all features are implemented and some rules are flattened.
-
-// There are no required fields to allow backward compatibility with older
-// corpus.
-
-// document ::= prolog element Misc*
-// prolog ::= XMLDecl? Misc* (doctypedecl Misc*)?
-// XMLDecl ::= '<?xml' VersionInfo EncodingDecl? SDDecl? S? '?>'
-// doctypedecl ::=
-//    '<!DOCTYPE' S Name (S ExternalID)? S? ('[' intSubset ']' S?)? '>'
-message modelVersion {
-    required string version = 1;
-}
-
-message groupId {
-    required string group = 1;
-}
-
-message artifactId {
-    required string artifact = 1;
-}
-
-message version {
-    required string vers = 1;
-}
-
 enum ScopeEnum {
-  option allow_alias = true;
-
-  compile = 1;
   provided = 1;
   runtime = 2;
   test = 3;
   system = 4;
 }
 
-message DependencyScope {
+message projectName {
+  required string name = 1;
+}
+
+message status {
   required ScopeEnum scope = 1;
 }
 
-message dependency {
-  required groupId group = 1;
-  required artifactId artifact = 2;
-  required version vers = 3;
-  required DependencyScope scope = 4;
-}
-
-message dependencies {
-  repeated dependency deps = 1;
-}
-
 message project {
-  required modelVersion mversion = 1;
-  required groupId group = 2;
-  required artifactId artifact = 3;
-  required version vers = 4;
-  optional dependencies deps = 5;
+  required projectName name = 1;
+  repeated status status = 2;
 }
 
 message Input {
-  required project document = 1;
+  required project project = 1;
 }
+
+
