@@ -16,6 +16,7 @@ set(EXPAT_CFLAGS "${CMAKE_C_FLAGS} ${FUZZING_FLAGS}")
 set(EXPAT_CXXFLAGS "${CMAKE_CXX_FLAGS} ${FUZZING_FLAGS}")
 include(expat)
 
+include_directories(include)
 add_executable(expat_example
                expat_example.cc
         xml_renderer.cpp

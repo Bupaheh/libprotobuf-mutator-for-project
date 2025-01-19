@@ -19,16 +19,21 @@
 #include "src/libfuzzer/libfuzzer_macro.h"
 #include "xml_renderer.h"
 
+#include "xml2json.hpp"
+
 int counter = 0;
 
 DEFINE_PROTO_FUZZER(const protobuf_mutator::xml::Input& message) {
   const std::string xml = xml::render(message);
-  const std::string filename = std::to_string(counter) + ".txt";
-  std::ofstream out;
-  if (counter < 1000) {
-    out.open ("/home/pvl/folder/projects/proto-code/libprotobuf-mutator-for-project/examples/expat/output/" + filename);
-    out << xml << std::endl;
-    out.close();
-    counter++;
+  std::string res = "";
+
+  try {
+    res = xml2json(xml.c_str());
+  } catch(const std::exception& e) {
+    std::cerr << "Exception was thrown: " << e.what() << '\n';
+  }
+
+  if (res == "") {
+    std::cerr << "Invalid result\n";
   }
 }

@@ -1,19 +1,8 @@
 syntax = "proto2";
 package protobuf_mutator.xml;
 
-// Simplified definition of XML formant according https://www.w3.org/TR/xml/
-// Not all features are implemented and some rules are flattened.
-
-// There are no required fields to allow backward compatibility with older
-// corpus.
-
-// document ::= prolog element Misc*
-// prolog ::= XMLDecl? Misc* (doctypedecl Misc*)?
-// XMLDecl ::= '<?xml' VersionInfo EncodingDecl? SDDecl? S? '?>'
-// doctypedecl ::=
-//    '<!DOCTYPE' S Name (S ExternalID)? S? ('[' intSubset ']' S?)? '>'
 message ModelVersion {
-    required string version = 1;
+    required uint32 version = 1;
 }
 
 message GroupId {
