@@ -21,8 +21,6 @@
 
 #include "xml2json.hpp"
 
-int counter = 0;
-
 DEFINE_PROTO_FUZZER(const protobuf_mutator::xml::Input& message) {
   const std::string xml = xml::render(message);
   std::string res = "";
