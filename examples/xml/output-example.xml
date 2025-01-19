@@ -1,0 +1,135 @@
+<project>
+  <modelVersion>
+    0
+  </modelVersion>
+  
+  <groupId>
+    
+  </groupId>
+  
+  <artifactId>
+    
+  </artifactId>
+  
+  <version>
+    
+  </version>
+  
+  <dependencies>
+    <dependency>
+      <groupId>
+        
+      </groupId>
+      
+      <artifactId>
+        
+      </artifactId>
+      
+      <version>
+        
+      </version>
+      
+      <dependencyScope>
+        runtime
+      </dependencyScope>
+      
+    </dependency>
+    
+    <dependency>
+      <groupId>
+        
+      </groupId>
+      
+      <artifactId>
+        ========================
+      </artifactId>
+      
+      <version>
+        
+      </version>
+      
+      <dependencyScope>
+        compile
+      </dependencyScope>
+      
+    </dependency>
+    
+    <dependency name="" mode="mode1">
+      <groupId>
+        
+      </groupId>
+      
+      <artifactId>
+        
+      </artifactId>
+      
+      <version>
+        
+      </version>
+      
+      <dependencyScope>
+        system
+      </dependencyScope>
+      
+    </dependency>
+    
+    <dependency name="" mode="mode2">
+      <groupId>
+        ����������������������������������������������������������������������������������������������
+      </groupId>
+      
+      <artifactId>
+        
+      </artifactId>
+      
+      <version>
+        
+      </version>
+      
+      <dependencyScope>
+        system
+      </dependencyScope>
+      
+    </dependency>
+    
+    <dependency>
+      <groupId>
+        
+      </groupId>
+      
+      <artifactId>
+        
+      </artifactId>
+      
+      <version>
+        
+      </version>
+      
+      <dependencyScope>
+        system
+      </dependencyScope>
+      
+    </dependency>
+    
+    <dependency>
+      <groupId>
+        
+      </groupId>
+      
+      <artifactId>
+        
+      </artifactId>
+      
+      <version>
+        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      </version>
+      
+      <dependencyScope>
+        system
+      </dependencyScope>
+      
+    </dependency>
+    
+  </dependencies>
+  
+</project>
