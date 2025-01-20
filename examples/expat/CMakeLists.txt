@@ -12,9 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set(EXPAT_CFLAGS "${CMAKE_C_FLAGS} ${FUZZING_FLAGS}")
-set(EXPAT_CXXFLAGS "${CMAKE_CXX_FLAGS} ${FUZZING_FLAGS}")
-include(expat)
+# set(FUZZING_FLAGS "${FUZZING_FLAGS} -fprofile-instr-generate -fcoverage-mapping")
+set(EXPAT_CFLAGS "${CMAKE_C_FLAGS} ${FUZZING_FLAGS} -fuzzing-fprofile-instr-generate -fcoverage-mapping")
+set(EXPAT_CXXFLAGS "${CMAKE_CXX_FLAGS} ${FUZZING_FLAGS} -fuzzing-fprofile-instr-generate -fcoverage-mapping")
+# include(expat)
+
+add_compile_options(-fprofile-instr-generate -fcoverage-mapping)
 
 include_directories(include)
 add_executable(expat_example
@@ -26,8 +29,7 @@ add_executable(expat_example
 )
 target_link_libraries(expat_example
                       protobuf-mutator-xml
-                      ${LIB_PROTO_MUTATOR_FUZZER_LIBRARIES}
-                      ${EXPAT_LIBRARIES})
+                      ${LIB_PROTO_MUTATOR_FUZZER_LIBRARIES} -fprofile-instr-generate -fcoverage-mapping)
 set_property(TARGET expat_example
              PROPERTY COMPILE_FLAGS ${FUZZING_FLAGS})
 set_property(TARGET expat_example
