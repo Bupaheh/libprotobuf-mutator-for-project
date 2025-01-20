@@ -107,14 +107,12 @@ void render_field(
   }
 }
 
-void render_attribute_field(
+void render_primitive_field(
   const Message& message,
   const Reflection* reflection,
   const FieldDescriptor* field,
   xml::Printer& out
 ) {
-  out.print(" " + field->name() + "=\"");
-
   if (field->is_repeated()) {
     std::cerr << "Repeated attributes are not supported";
     return;
@@ -157,7 +155,16 @@ void render_attribute_field(
 
     break;
   }
+}
 
+void render_attribute_field(
+  const Message& message,
+  const Reflection* reflection,
+  const FieldDescriptor* field,
+  xml::Printer& out
+) {
+  out.print(" " + field->name() + "=\"");
+  render_primitive_field(message, reflection, field, out);  
   out.print("\"");
 }
 
@@ -191,6 +198,29 @@ void render_attribute(
   }
 }
 
+bool is_trivial_message(
+  const Message& message,
+  const Reflection* reflection,
+  const std::vector<const FieldDescriptor*>& fields
+) {
+  int field_num = 0;
+  bool primitive_fields = true;
+
+  for (auto field : fields) {
+    if (field->name() == attribute_name) {
+      continue;
+    }
+
+    field_num++;
+    if (field->is_repeated() || field->type() == internal::FieldDescriptorLite::TYPE_MESSAGE) {
+      primitive_fields = false;
+      break;
+    }
+  }
+
+  return field_num <= 1 && primitive_fields;
+}
+
 void render_message(const Message& message, const std::string& name, xml::Printer& out) {
   const auto reflection = message.GetReflection();
   const auto descriptor = message.GetDescriptor();
@@ -198,18 +228,31 @@ void render_message(const Message& message, const std::string& name, xml::Printe
   std::vector<const FieldDescriptor*> fields;
   reflection->ListFields(message, &fields);
 
+  bool is_trivial = is_trivial_message(message, reflection, fields);
+
   out.print("<" + name);
   render_attribute(message, reflection, fields, out);
-  out.println(">");
-  out.push_indent();
+  out.print(">");
 
-  for (auto field : fields) {
-    if (field->name() == attribute_name) continue;
+  if (is_trivial) {
+    for (auto field : fields) {
+      if (field->name() == attribute_name) continue;
 
-    render_field(message, reflection, field, out);
+      render_primitive_field(message, reflection, field, out);
+    }
+  } else {
+    out.println();
+    out.push_indent();
+
+    for (auto field : fields) {
+      if (field->name() == attribute_name) continue;
+
+      render_field(message, reflection, field, out);
+    }
+
+    out.pop_indent();
   }
 
-  out.pop_indent();
   out.println("</" + name + ">");
   out.println();
 }

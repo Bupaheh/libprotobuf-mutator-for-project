@@ -1,132 +1,21 @@
 <project>
-  <modelVersion>
-    0
-  </modelVersion>
+  <modelVersion>0</modelVersion>
   
-  <groupId>
-    
-  </groupId>
+  <groupId></groupId>
   
-  <artifactId>
-    
-  </artifactId>
+  <artifactId></artifactId>
   
-  <version>
-    
-  </version>
+  <version>QQQQQ</version>
   
   <dependencies>
     <dependency>
-      <groupId>
-        
-      </groupId>
+      <groupId>vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv</groupId>
       
-      <artifactId>
-        
-      </artifactId>
+      <artifactId>QQQQQ</artifactId>
       
-      <version>
-        
-      </version>
+      <version></version>
       
-      <dependencyScope>
-        runtime
-      </dependencyScope>
-      
-    </dependency>
-    
-    <dependency>
-      <groupId>
-        
-      </groupId>
-      
-      <artifactId>
-        ========================
-      </artifactId>
-      
-      <version>
-        
-      </version>
-      
-      <dependencyScope>
-        compile
-      </dependencyScope>
-      
-    </dependency>
-    
-    <dependency name="" mode="mode1">
-      <groupId>
-        
-      </groupId>
-      
-      <artifactId>
-        
-      </artifactId>
-      
-      <version>
-        
-      </version>
-      
-      <dependencyScope>
-        system
-      </dependencyScope>
-      
-    </dependency>
-    
-    <dependency name="" mode="mode2">
-      <groupId>
-        ����������������������������������������������������������������������������������������������
-      </groupId>
-      
-      <artifactId>
-        
-      </artifactId>
-      
-      <version>
-        
-      </version>
-      
-      <dependencyScope>
-        system
-      </dependencyScope>
-      
-    </dependency>
-    
-    <dependency>
-      <groupId>
-        
-      </groupId>
-      
-      <artifactId>
-        
-      </artifactId>
-      
-      <version>
-        
-      </version>
-      
-      <dependencyScope>
-        system
-      </dependencyScope>
-      
-    </dependency>
-    
-    <dependency>
-      <groupId>
-        
-      </groupId>
-      
-      <artifactId>
-        
-      </artifactId>
-      
-      <version>
-        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-      </version>
-      
-      <dependencyScope>
-        system
-      </dependencyScope>
+      <dependencyScope>compile</dependencyScope>
       
     </dependency>
     
